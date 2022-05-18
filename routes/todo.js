@@ -6,6 +6,12 @@ let todos = [
         id: 1,
         name: 'Learn NodeJS',
         description: 'Need to learn basics of NodeJS',
+        done: false
+    },
+    {
+        id: 2,
+        name: 'Learn NodeJS',
+        description: 'Need to learn basics of NodeJS',
         done: true
     }
 ]
@@ -35,7 +41,7 @@ router.post('/add', (req, res) => {
 
 // Done todo
 router.put('/done', (req, res) => {
-    const id = req.body?.id;
+    const id = req.body.id;
 
     if (! id) {
         return res.status(400).json({
