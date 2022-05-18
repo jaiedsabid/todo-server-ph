@@ -27,6 +27,7 @@ router.post('/add', (req, res) => {
     }
 
     todo.id = todos.length + 1;
+    todo.done = false;
     todos.push(todo);
     
     return res.json(todo);
@@ -34,52 +35,48 @@ router.post('/add', (req, res) => {
 
 // Done todo
 router.patch('/done', (req, res) => {
-    const todo = req.body;
+    const id = req.body?.id;
 
-    if (! todo?.id) {
+    if (! id) {
         return res.status(400).json({
             error: 'Id is required',
-            data: req.body
         });
     }
 
-    const index = todos.findIndex(t => t.id === todo.id);
+    const index = todos.findIndex(t => parseInt(t.id) === parseInt(id));
 
     if (index === -1) {
         return res.status(404).json({
             error: 'Todo not found',
-            data: req.body
         });
     }
 
     todos[index].done = true;
 
-    return res.json(todo);
+    return res.json(todos[index]);
 });
 
 // Delete todo
 router.delete('/delete', (req, res) => {
-    const todo = req.body;
+    const id = req.body?.id;
 
-    if (! todo?.id) {
+    if (! id) {
         return res.status(400).json({
             error: 'Id is required',
-            data: req.body
         });
     }
 
-    const index = todos.findIndex(t => t.id === todo.id);
+    const index = todos.findIndex(t => parseInt(t.id) === parseInt(id));
 
     if (index === -1) {
         return res.status(404).json({
             error: 'Todo not found',
-            data: req.body
         });
     }
 
     todos.splice(index, 1);
 
-    return res.json(todo);
+    return res.sendStatus(200);
 });
 
 module.exports = router;
