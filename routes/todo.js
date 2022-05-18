@@ -34,7 +34,7 @@ router.post('/add', (req, res) => {
 });
 
 // Done todo
-router.patch('/done', (req, res) => {
+router.put('/done', (req, res) => {
     const id = req.body?.id;
 
     if (! id) {
