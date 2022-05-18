@@ -7,7 +7,7 @@ const todoRoutes = require('./routes/todo');
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/todo', todoRoutes);
+app.use('/api/todos', todoRoutes);
 
 const PORT = process.env.PORT || 3000;
 
